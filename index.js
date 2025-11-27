@@ -1,11 +1,5 @@
-let age = 25;
-function displayAge() {
- console.log(age);
-}
-function changeAge(newAge) {
- age = newAge;           // updates the global variable
- console.log(age);       // print the value after updating
-}
-displayAge();   // prints: 25
-changeAge(30);  // prints: 30
-displayAge();   // prints: 30
+console.log("Message 1");
+setTimeout(function () {
+console.log("Message 2 after 2 seconds");
+}, 2000);
+console.log("Message 3");
