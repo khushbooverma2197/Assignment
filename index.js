@@ -1,11 +1,11 @@
-let age = 25;
-function displayAge() {
- console.log(age);
+function displayMessage(name) {
+ console.log("Hello, " + name + "!");
 }
-function changeAge(newAge) {
- age = newAge;           // updates the global variable
- console.log(age);       // print the value after updating
+function getUserInput(callback) {
+ setTimeout(() => {
+   const username = "Alice";
+   callback(username);
+ }, 1000);
 }
-displayAge();   // prints: 25
-changeAge(30);  // prints: 30
-displayAge();   // prints: 30
+// call it
+getUserInput(displayMessage);
