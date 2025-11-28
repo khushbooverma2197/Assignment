@@ -1,11 +1,9 @@
-let age = 25;
-function displayAge() {
- console.log(age);
+function timer(duration, onComplete) {
+ setTimeout(() => {
+   onComplete("Timer of " + duration + "ms is finished");
+ }, duration);
 }
-function changeAge(newAge) {
- age = newAge;           // updates the global variable
- console.log(age);       // print the value after updating
-}
-displayAge();   // prints: 25
-changeAge(30);  // prints: 30
-displayAge();   // prints: 30
+// example use
+timer(1000, (msg) => {
+ console.log(msg);
+});
