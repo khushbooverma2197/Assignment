@@ -1,25 +1,33 @@
-const list = document.querySelector('#item-list');   // select <ul>
-const button = document.getElementById('add-btn');
+const taskInput = document.getElementById('taskInput');
+const addTaskBtn = document.getElementById('addTaskBtn');
+const taskList = document.getElementById('taskList');
 
-button.addEventListener('click', function () {
-  // create new li
-  const li = document.createElement('li');
-  li.textContent = 'New Item';
+addTaskBtn.addEventListener('click', function() {
+    const task = taskInput.value.trim();
+    if (task === "") {
+        return; // Do nothing if input is empty
+    }
 
-  // find sequence number after adding
-  const currentCount = list.children.length + 1; // new li will be this index
+    const li = document.createElement('li');
+    li.textContent = task + ' ';
 
-  // style based on odd / even
-  if (currentCount % 2 === 1) {
-    // odd
-    li.style.fontWeight = 'bold';
-    li.style.color = 'blue';
-  } else {
-    // even
-    li.style.fontStyle = 'italic';
-    li.style.color = 'red';
-  }
+    // Complete button
+    const completeBtn = document.createElement('button');
+    completeBtn.textContent = 'Complete';
+    completeBtn.addEventListener('click', function() {
+        li.style.textDecoration = 'line-through';
+    });
 
-  // append to ul
-  list.appendChild(li);
+    // Delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.addEventListener('click', function() {
+        li.remove();
+    });
+
+    li.appendChild(completeBtn);
+    li.appendChild(deleteBtn);
+    taskList.appendChild(li);
+
+    taskInput.value = ""; // Clear input
 });
