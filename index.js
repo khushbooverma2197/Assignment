@@ -1,11 +1,12 @@
-let age = 25;
-function displayAge() {
- console.log(age);
+const heading = document.getElementById('main-heading');
+heading.textContent = 'Welcome to the DOM World!';
+
+// 2. Select all <p> elements and set text color to blue
+const paragraphs = document.getElementsByTagName('p');
+for (let i = 0; i < paragraphs.length; i++) {
+  paragraphs[i].style.color = 'blue';
 }
-function changeAge(newAge) {
- age = newAge;           // updates the global variable
- console.log(age);       // print the value after updating
-}
-displayAge();   // prints: 25
-changeAge(30);  // prints: 30
-displayAge();   // prints: 30
+
+// 3. Select the first <div> with class container and change background color
+const containerDiv = document.querySelector('.container');
+containerDiv.style.backgroundColor = 'yellow';
