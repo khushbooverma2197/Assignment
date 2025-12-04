@@ -1,32 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Creating and Removing Elements</title>
+  <title>Save and Load User Notes</title>
 </head>
 <body>
 
-  <button id="addBtn">Add Paragraph</button>
-  <button id="removeBtn">Remove Last Paragraph</button>
+  <h2>User Notes</h2>
 
-  <div id="container"></div>
+  <textarea id="notes" rows="8" cols="40" placeholder="Write your notes here..."></textarea>
+  <br><br>
+
+  <button id="saveBtn">Save Notes</button>
+  <button id="loadBtn">Load Notes</button>
+  <button id="clearBtn">Clear Notes</button>
 
   <script>
-    const container = document.getElementById("container");
-    const addBtn = document.getElementById("addBtn");
-    const removeBtn = document.getElementById("removeBtn");
+    const notes = document.getElementById("notes");
+    const saveBtn = document.getElementById("saveBtn");
+    const loadBtn = document.getElementById("loadBtn");
+    const clearBtn = document.getElementById("clearBtn");
 
-    // Add Paragraph
-    addBtn.addEventListener("click", function () {
-      const p = document.createElement("p");
-      p.textContent = "This is a new paragraph.";
-      container.appendChild(p); // add to div
+    // Load notes automatically on page load
+    window.onload = function () {
+      let savedNotes = localStorage.getItem("userNotes");
+      if (savedNotes) {
+        notes.value = savedNotes;
+      }
+    };
+
+    // Save Notes
+    saveBtn.addEventListener("click", function () {
+      let text = notes.value.trim();
+
+      if (text === "") {
+        alert("Cannot save empty notes!");
+        return;
+      }
+
+      localStorage.setItem("userNotes", text);
+      alert("Notes saved!");
     });
 
-    // Remove Last Paragraph
-    removeBtn.addEventListener("click", function () {
-      if (container.lastChild) {
-        container.removeChild(container.lastChild); // remove last child
+    // Load Notes when button clicked
+    loadBtn.addEventListener("click", function () {
+      let savedNotes = localStorage.getItem("userNotes");
+
+      if (savedNotes) {
+        notes.value = savedNotes;
+      } else {
+        alert("No saved notes found.");
       }
+    });
+
+    // Clear Notes
+    clearBtn.addEventListener("click", function () {
+      localStorage.removeItem("userNotes");
+      notes.value = "";
+      alert("Notes cleared!");
     });
   </script>
 
